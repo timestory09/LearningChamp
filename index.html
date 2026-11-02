@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DevPath · Developer Learning &amp; Assessment Dashboard</title>
+  <meta name="description" content="Master Java, Spring Boot, Microservices, Kafka, LLD, and HLD with adaptive exams, spaced repetition, streak tracking, and mock interviews.">
+  <meta name="theme-color" content="#0b0d17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DevPath">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/battle.css">
+
+  <script>
+    /* Instant theme application to prevent FOUC */
+    try {
+      var s = JSON.parse(localStorage.getItem('devpath_settings') || '{}');
+      var t = s.theme || 'dark';
+      if (t === 'auto') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.dataset.theme = t;
+      if (s.hue) document.documentElement.style.setProperty('--hue', s.hue);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar Navigation"></aside>
+    <div class="main-wrap">
+      <header class="topbar">
+        <button class="icon-btn only-mobile" data-action="menu" aria-label="Toggle mobile menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <button class="icon-btn only-desktop" data-action="collapse" aria-label="Toggle sidebar" title="Toggle sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>
+        </button>
+        <div class="search" role="search">
+          <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="globalSearch" type="search" placeholder="Search 206 topics, notes, keywords…" aria-label="Search curriculum" autocomplete="off" spellcheck="false">
+          <kbd>/</kbd>
+        </div>
+        <div class="top-right">
+          <div id="topStats"></div>
+          <button class="icon-btn" data-action="palette" aria-label="Open command palette" title="Command Palette (Ctrl / ⌘ + K)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3z"/></svg>
+          </button>
+          <button class="icon-btn" id="themeBtn" data-action="theme" aria-label="Toggle theme"></button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <nav id="tabbar" aria-label="Quick mobile navigation"></nav>
+  <div id="dock" class="dock" hidden aria-label="Active Focus Timer"></div>
+  <aside id="panel" class="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" aria-hidden="true"></aside>
+  <div id="overlay" class="overlay"></div>
+  <div id="quiz" hidden aria-live="polite"></div>
+  <div id="modal" hidden></div>
+  <div id="palette" hidden></div>
+  <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <noscript><p style="padding:24px;font-family:sans-serif">DevPath requires JavaScript to run.</p></noscript>
+
+  <!-- Application Modules -->
+  <script src="js/core.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/quiz-engine.js"></script>
+  <!-- Question Banks -->
+  <script src="js/bank/bank_java.js"></script>
+  <script src="js/bank/bank_spring.js"></script>
+  <script src="js/bank/bank_microservices.js"></script>
+  <script src="js/bank/bank_eda.js"></script>
+  <script src="js/bank/bank_lld.js"></script>
+  <script src="js/bank/bank_hld.js"></script>
+  <script src="js/bank/bank_junit.js"></script>
+  <script src="js/bank/bank_cloud_ai.js"></script>
+  <script src="js/share-card.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/quiz-ui.js"></script>
+  <!-- PeerJS WebRTC & Battle Engine -->
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="js/battle-engine.js"></script>
+  <script src="js/battle-ui.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
